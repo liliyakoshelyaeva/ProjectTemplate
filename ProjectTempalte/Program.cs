@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace ProjectTempalte
 {
@@ -7,9 +8,19 @@ namespace ProjectTempalte
         static void StackTask()
         {
             Console.WriteLine("Stack Task");
-            Console.WriteLine("Здесь пока ничего нет"); // сотрите эту строку после реализации класса Stack
-                                                        // и как-то протестируйте ваш код
-            Console.WriteLine("-------");
+            Stack<int> stack = new Stack<int>(5);
+            //добавление элементов в стек
+            stack.Push(1);
+            stack.Push(2);
+            stack.Push(3);
+            //выведение элементов стека
+            Console.WriteLine($"Размер стека: {stack.Size}");
+            Console.WriteLine($"Верхний элемент: {stack.Peek()}");
+            //извлечение элементов из стека
+            Console.WriteLine($"Извлечённый элемент: {stack.Pop()}");
+            Console.WriteLine($"Извлечённый элемент: {stack.Pop()}");
+            //проверка на пустоту стека
+            Console.WriteLine($"Стек пуст: {stack.IsEmpty()}");
         }
         static void DeepLookStackTask()
         {
@@ -40,7 +51,25 @@ namespace ProjectTempalte
         static void RegexTask()
         {
             Console.WriteLine("Regex Task");
-            Console.WriteLine("Здесь пока ничего нет"); // сотрите эту строку после выполнения условий из TODO ниже
+            string emailRegex = @"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}";
+            string fileName = "test.txt";
+            int emailCount = 0;
+            using (StreamReader sr = new StreamReader(fileName))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] words = line.Split(' ');
+                    foreach (string word in words)
+                    {
+                        if (Regex.IsMatch(word, emailRegex))
+                        {
+                            emailCount++;
+                        }
+                    }
+                }
+            }
+            Console.WriteLine($"Количество email адресов в файле: {emailCount}");
             // TODO: написать Regex, который сумеет распознать email адрес.
             // Прочитать данные из файла и вывести количество email адресов.
             // Слов (а потенциально и адресов) в строке может быть несколько
@@ -87,5 +116,35 @@ namespace ProjectTempalte
             DictionaryTask();
             RecursionTask();
         }
+
+        // TODO:
+        // Функция должна прочитать содержимое файла и привести полученные строки к нижнему регистру.
+        // Также должны быть удалены знаки препинания
+        static List<string> ReadFromFile(string filePath)
+        {
+            return new(); // Заглушка
+        }
+
+        // TODO:
+        // Функция должная считывать и возвращать прочитанные целые числа из бинарного файла
+        static List<int> ReadIntsFromBinaryFile(string path)
+        {
+            return new(); // Заглушка
+        }
+
+        // TODO:
+        // Функция должная записывать целые числа в бинарный файл
+        static void WriteIntsToBinaryFile(string path, List<int> data)
+        {
+        }
+
+        int MinDigit(int n)
+        {
+            return 0; // Заглушка
+        }
     }
+
+
+
+
 }

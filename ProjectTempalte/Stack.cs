@@ -16,8 +16,10 @@ namespace ProjectTempalte
         // TODO:
         // Добавить параметр по умолчанию capacity
         // Иницилизировать поля класса в соответствии с принимаемыми аргументами
-        public Stack()
+        public Stack(int capacity = 10)
         {
+            values = new T[capacity];
+            size = 0;
         }
 
         // TODO:
@@ -29,6 +31,12 @@ namespace ProjectTempalte
             // Для изменения размера массива можно
             // либо создайте новый массив и перенесите в него элементы из старого,
             // либо воспользуйтесь функцией Array.Resize
+            if (size == values.Length)
+            {
+                Array.Resize(ref values, values.Length + 1);
+            }
+            values[size] = value;
+            size++;
         }
 
         // TODO:
@@ -37,19 +45,29 @@ namespace ProjectTempalte
         // Если да, вернуть последний элемент и "удалить верхний элемент" (уменьшить значение size)
         public T Pop()
         {
-            return default(T); // Заглушка
+            if (IsEmpty())
+            {
+                throw new InvalidOperationException("Stack is empty");
+            }
+            T top = values[size - 1];
+            size--;
+            return top;
         }
 
         // TODO:
         // Аналогично предыдущему, но ничего не удаляем
         public T Peek()
         {
-            return default(T); // Заглушка
+            if (IsEmpty())
+            {
+                throw new InvalidOperationException("Stack is empty");
+            }
+            return values[size - 1];
         }
 
         public bool IsEmpty()
         {
-            return true; // TODO: поменять
+            return size == 0;
         }
     }
 }
